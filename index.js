@@ -5,6 +5,10 @@ const port =4000;
 // appel du body parser pour la lecture des données
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
+users=["ahmed","mohamed","ali"];
+
+
 app.get('/', (req, res) => {
     res.send('Hello node js! <a href="/lien">visiter lien</a>');
 }
@@ -18,6 +22,26 @@ app.post('/welcome', (req, res) => {
     res.send('Welcome ' + req.body.nom + ' ' + req.body.prenom);
 }
 );
+app.get('/users', (req, res) => {
+    res.send(users);
+}
+);
+app.post('/users', (req, res) => {
+    users.push(req.body.name);
+    res.send(users);
+}
+);
+app.post('/evaluation',(req,res)=>{
+let note=req.body.note;
+if(note>=10){
+    res.send("vous avez reussi l'examen");
+}
+else{
+    res.send("vous avez echoué l'examen");
+}    
+});
+
+
 
 
 app.listen(port, () => {
